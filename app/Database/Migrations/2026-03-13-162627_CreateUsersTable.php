@@ -48,6 +48,6 @@ class CreateUsersTable extends Migration
 
     public function down()
     {
-
+        $this->forge->dropTable('users'); // untuk menghapus table users dari database
     }
 }
