@@ -42,6 +42,9 @@ class NoCacheFilter implements FilterInterface
      */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        //memaksa agar browser tidak menyimpan riwayat halaman
+        $response->setHeader('Cache-Control', 'no-store, max-age=0, no-cache, must-revalidate');
+        $response->setHeader('Pragma', 'no-cache');
+        $response->setHeader('Expires', '0');
     }
 }

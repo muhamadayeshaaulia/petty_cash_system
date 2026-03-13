@@ -35,6 +35,7 @@ class Filters extends BaseFilters
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
         'auth'          => \App\Filters\AuthFilter::class, //menambahkan Auth filter
+        'nocache'       => \App\Filters\NoCacheFilter::class, //menambahkan NoCachefilter
     ];
 
     /**
@@ -78,6 +79,7 @@ class Filters extends BaseFilters
             // 'invalidchars',
         ],
         'after' => [
+            'nocache', //berlaku untuk kesemua halaman
             // 'honeypot',
             // 'secureheaders',
         ],
