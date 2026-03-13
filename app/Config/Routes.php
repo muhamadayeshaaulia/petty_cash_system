@@ -12,10 +12,12 @@ $routes->get('login', 'Auth::index');
 $routes->post('auth/process', 'Auth::process');
 $routes->get('logout', 'Auth::logout');
 
-// Rute Dashboard Sementara (Agar tidak error setelah login)
-$routes->get('karyawan/dashboard', function() {
-    return 'Selamat datang KARYAWAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
-});
+// Rute Karyawan
+$routes->get('karyawan/dashboard', 'KaryawanController::dashboard');
+$routes->get('karyawan/pengajuan/create', 'KaryawanController::create');
+$routes->post('karyawan/pengajuan/store', 'KaryawanController::store');
+
+//route sementara
 $routes->get('admin/dashboard', function() {
     return 'Selamat datang ADMIN KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
 });
