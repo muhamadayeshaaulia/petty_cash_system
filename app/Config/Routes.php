@@ -25,7 +25,8 @@ $routes->group('admin', ['filter' => 'auth'], function($routes) {
     $routes->get('pengajuan/update/(:num)/(:any)', 'AdminController::updateStatus/$1/$2');
 });
 
-//router sementara
-$routes->get('manager/dashboard', function() {
-    return 'Selamat datang MANAJER KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
+//router manager keuangan
+$routes->group('manager', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'ManagerController::dashboard');
+    $routes->get('pengajuan/update/(:num)/(:any)', 'ManagerController::updateStatus/$1/$2');
 });
