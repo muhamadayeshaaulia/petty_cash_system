@@ -33,6 +33,18 @@ untuk masuk ke visual studio code.
 CI_ENVIRONMENT = development
 app.baseURL = 'http://localhost:8080/'
 ```
+4. Persiapan Database
+  - Buka MySQL Anda (bisa lewat XAMPP/phpMyAdmin atau database client lainnya) dan buat database kosong baru dengan nama db_petty_cash.
+  - Kembali ke file .env di CodeIgniter, cari bagian database dan sesuaikan konfigurasinya :
+
+```php
+//(Catatan: Sesuaikan username dan password jika Kamu menggunakan konfigurasi MySQL yang berbeda).
+database.default.hostname = localhost
+database.default.database = db_petty_cash
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+```
 
 <div align="center">
   <p>Made with by 716 Production</p>
