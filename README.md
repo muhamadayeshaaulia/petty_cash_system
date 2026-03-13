@@ -66,13 +66,14 @@ php spark make:seeder UserSeeder
 php spark db:seed UserSeeder
 ```
 
-8. membuat model untuk user 
+8. membuat keperluan model 
 
 ```php
 php spark make:model UserModel
+php spark make:model PengajuanModel
 ```
 
-9. membuat controler Auth 
+9. membuat keperluan controler
 
 ```php
 php spark make:controller Auth
