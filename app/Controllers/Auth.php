@@ -38,11 +38,29 @@ class Auth extends BaseController
                 ];
                 session()->set($ses_data);
                 return $this->redirectBerdasarkanRole($user['role']);
-            } else {
-                session()->setFlashdata('error', 'Username tidak di temukan!');
-                return redirect()->back();
+            } else{
+                session()->setFlashdata('error', 'Password Salah');
             }
+        }else {
+            session()->setFlashdata('error', 'Username tidak di temukan!');
+            return redirect()->back();
+            }
+
+    }
+    public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/login');
+    }
+    // fungsi agar login rapih saat membagi sesi login rolenya
+    private function redirectBerdasarkanRole($role)
+    {
+        if ($role === 'karyawan') {
+            return redirect()->to('/karyawan/dashboard');
+        } elseif ($role === 'admin_keuangan') {
+            return redirect()->to('/admin/dashboard/');
+        }elseif ($role === 'manager_keuangan'){
+            return redirect()->to('/manager/dashboard/');
         }
-        
     }
 }
