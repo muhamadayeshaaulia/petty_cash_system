@@ -23,9 +23,9 @@ code
 untuk masuk ke visual studio code.
 
 3. konfigurasi Environment(.env)
-  -cari file env, lakukan rename menjadi (.env)
-  -buka .env lakukan perubahan 
-  
+  - cari file env, lakukan rename menjadi (.env)
+  - buka .env lakukan perubahan 
+
 ```php
 //cari CI_ENVIRONMENT = production ubah ke decelopment
 //isi app.baseURL = '' dengan http://localhost:8080/
