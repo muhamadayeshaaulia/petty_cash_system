@@ -42,10 +42,12 @@ class CreateUsersTable extends Migration
                 'null' => true,
             ],
         ]);
+        $this->forge->addKey('id_user', true); // menentukan primary key
+        $this->forge->createTable('users'); // untuk membuat tabel baru di database
     }
 
     public function down()
     {
-        //
+
     }
 }
