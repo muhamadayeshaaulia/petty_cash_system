@@ -56,6 +56,11 @@ php spark migrate
 ```
 lalu liat perubahan di database.
 
+7. Membuat Data Dummy
+
+```php
+php spark make:seeder UserSeeder
+```
 
 <div align="center">
   <p>Made with by 716 Production</p>
