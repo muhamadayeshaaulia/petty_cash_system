@@ -85,6 +85,27 @@ php spark make:controller Auth
 login.php
 ```
 
+11. Mengatur router di app/Config/Routes.php
+
+```php
+// Rute untuk Login dan Logout
+$routes->get('/', 'Auth::index');
+$routes->get('login', 'Auth::index');
+$routes->post('auth/process', 'Auth::process');
+$routes->get('logout', 'Auth::logout');
+
+// Rute Dashboard Sementara (Agar tidak error setelah login)
+$routes->get('karyawan/dashboard', function() {
+    return 'Selamat datang KARYAWAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
+});
+$routes->get('admin/dashboard', function() {
+    return 'Selamat datang ADMIN KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
+});
+$routes->get('manajer/dashboard', function() {
+    return 'Selamat datang MANAJER KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
+});
+```
+
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>
