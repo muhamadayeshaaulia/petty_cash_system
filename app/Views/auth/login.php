@@ -20,7 +20,7 @@
                 <label>Password</label> <br>
                 <input type="password" name="password" required>
             </div>
-            <button type="submit"></button>
+            <button type="submit">Login</button>
         </form>
 
 </body>

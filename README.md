@@ -106,6 +106,13 @@ $routes->get('manajer/dashboard', function() {
 });
 ```
 
+12. jalan kan server 
+
+```php
+php spark serve
+//Lalu buka browser dan akses http://localhost:8080/
+```
+
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>
