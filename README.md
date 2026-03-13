@@ -49,6 +49,14 @@ database.default.DBDriver = MySQLi
 ```php 
 php spark make:migration CreateUsersTable
 ```
+
+6. Setelah mengisi keperluan field di migration lakukan
+```php
+php spark migrate
+```
+lalu liat perubahan di database.
+
+
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>
