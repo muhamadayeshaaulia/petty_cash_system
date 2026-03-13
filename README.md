@@ -110,18 +110,16 @@ $routes->get('manajer/dashboard', function() {
     return 'Selamat datang MANAJER KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
 });
 ```
+12. membuat filter agar tidak sembarangan orang bisa masuk link di tuju lewat browser untuk memberikan ke amanan kepada akses semua role 
 
-12. jalan kan server 
+```php
+php spark make:filter AuthFilter
+```
+13. jalan kan server 
 
 ```php
 php spark serve
 //Lalu buka browser dan akses http://localhost:8080/
-```
-
-13. membuat filter agar tidak sembarangan orang bisa masuk link di tuju lewat browser untuk memberikan ke amanan kepada akses semua role 
-
-```php
-php spark make:filter AuthFilter
 ```
 
 <div align="center">
