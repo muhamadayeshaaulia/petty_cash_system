@@ -13,13 +13,13 @@
 3.konfigurasi Environment(.env)
   -cari file env, lakukan rename menjadi (.env)
   -buka .env lakukan perubahan 
-``php
+```php
 //cari CI_ENVIRONMENT = production ubah ke decelopment
 //isi app.baseURL = '' dengan http://localhost:8080/
 //hapus Tanda # pada keduanya
 CI_ENVIRONMENT = development
 app.baseURL = 'http://localhost:8080/'
-``
+```
 
 <div align="center">
   <p>Made with by 716 Production</p>
