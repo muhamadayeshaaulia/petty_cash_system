@@ -1,6 +1,6 @@
 ## RANCANGAN SISTEM INFORMASI PENGELOLAAN PETTY CASH
 
-##Role Sementara
+## Role Sementara
 - karyawan buat mengajukan petty cash
 - admin keuangan mengecek pengajuan
 - manajer keuangan approv pengajuan
