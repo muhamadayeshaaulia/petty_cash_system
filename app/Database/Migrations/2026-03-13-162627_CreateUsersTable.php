@@ -30,7 +30,7 @@ class CreateUsersTable extends Migration
             ],
             'role' => [ // menentukan role sebagai siapa
                 'type'       => 'ENUM',
-                'constraint' => ['karyawan', 'admin_keuangan', 'manajer_keuangan'],
+                'constraint' => ['karyawan', 'admin_keuangan', 'manager_keuangan'],
                 'default'    => 'karyawan',
             ],
             'created_at' => [ // time pembuatan pertama kali data di buat

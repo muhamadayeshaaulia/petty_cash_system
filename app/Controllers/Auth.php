@@ -40,10 +40,11 @@ class Auth extends BaseController
                 return $this->redirectBerdasarkanRole($user['role']);
             } else{
                 session()->setFlashdata('error', 'Password Salah');
+                return redirect()->to('/login');
             }
         }else {
             session()->setFlashdata('error', 'Username tidak di temukan!');
-            return redirect()->back();
+            return redirect()->to('/login');
             }
 
     }

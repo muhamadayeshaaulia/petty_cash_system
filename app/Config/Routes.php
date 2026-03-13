@@ -19,6 +19,6 @@ $routes->get('karyawan/dashboard', function() {
 $routes->get('admin/dashboard', function() {
     return 'Selamat datang ADMIN KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
 });
-$routes->get('manajer/dashboard', function() {
+$routes->get('manager/dashboard', function() {
     return 'Selamat datang MANAJER KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
 });

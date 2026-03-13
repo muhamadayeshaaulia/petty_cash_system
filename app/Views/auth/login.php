@@ -10,7 +10,7 @@
     <?php if (session()->getFlashdata('error')): ?>
         <?php endif; ?>
 
-        <form action="<? base_url('auth/process')?>"method="POST" style="display: inline-block; text-align: left;border: 1px solid #ccc; padding: 20px;">
+        <form action="/auth/process"method="POST" style="display: inline-block; text-align: left;border: 1px solid #ccc; padding: 20px;">
             <? csrf_field()?>
             <div style="margin-bottom: 10px;">
                 <label>Username</label> <br>
