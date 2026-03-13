@@ -19,6 +19,28 @@ class CreateUsersTable extends Migration
                 'type'       => 'VARCHAR',
                 'constraint' => '100',
             ],
+            'username' => [ // username di gunakan untuk login
+                'type'       => 'VARCHAR',
+                'constraint' => '50',
+                'unique'     => true,
+            ],
+            'password' => [ // password untuk login kedalam aplikasi
+                'type'       => 'VARCHAR',
+                'constraint' => '255',
+            ],
+            'role' => [ // menentukan role sebagai siapa
+                'type'       => 'ENUM',
+                'constraint' => ['karyawan', 'admin_keuangan', 'manajer_keuangan'],
+                'default'    => 'karyawan',
+            ],
+            'created_at' => [ // time pembuatan pertama kali data di buat
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
+            'updated_at' => [ // ketika ada update tanggal selalu berubah mengikuti tanggal perubahan
+                'type' => 'DATETIME',
+                'null' => true,
+            ],
         ]);
     }
 
