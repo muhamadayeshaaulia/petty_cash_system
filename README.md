@@ -117,6 +117,12 @@ php spark serve
 //Lalu buka browser dan akses http://localhost:8080/
 ```
 
+13. membuat filter agar tidak sembarangan orang bisa masuk link di tuju lewat browser untuk memberikan ke amanan kepada akses semua role 
+
+```php
+php spark make:filter AuthFilter
+```
+
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>
