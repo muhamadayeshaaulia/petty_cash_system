@@ -77,6 +77,14 @@ php spark make:model UserModel
 php spark make:controller Auth
 ```
 
+10. Membuat Tampilan (View) Login
+
+```php
+//buat folder auth di app/Views
+// buat file di dalam nya 
+login.php
+```
+
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>
