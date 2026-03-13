@@ -77,6 +77,7 @@ php spark make:model PengajuanModel
 
 ```php
 php spark make:controller Auth
+php spark make:controller KaryawanController
 ```
 
 10. Membuat Tampilan (View) Login
