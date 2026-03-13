@@ -56,10 +56,13 @@ php spark migrate
 ```
 lalu liat perubahan di database.
 
-7. Membuat Data Dummy
+7. Membuat Data Dummy, jika data sudah di buat lalu jalan kan
 
 ```php
+// membuat
 php spark make:seeder UserSeeder
+//menjalankan
+php spark db:seed UserSeeder
 ```
 
 <div align="center">
