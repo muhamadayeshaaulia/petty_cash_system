@@ -65,6 +65,12 @@ php spark make:seeder UserSeeder
 php spark db:seed UserSeeder
 ```
 
+8. membuat model untuk user 
+
+```php
+php spark make:model UserModel
+```
+
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>

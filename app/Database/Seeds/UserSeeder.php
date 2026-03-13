@@ -28,6 +28,6 @@ class UserSeeder extends Seeder
                 'role' => 'manager_keuangan',
             ],
         ];
-        $this->table('users')->insertBatch($data);
+        $this->db->table('users')->insertBatch($data);
     }
 }
