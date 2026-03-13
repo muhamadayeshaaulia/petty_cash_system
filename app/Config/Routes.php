@@ -13,13 +13,17 @@ $routes->post('auth/process', 'Auth::process');
 $routes->get('logout', 'Auth::logout');
 
 // Rute Karyawan
-$routes->get('karyawan/dashboard', 'KaryawanController::dashboard');
-$routes->get('karyawan/pengajuan/create', 'KaryawanController::create');
-$routes->post('karyawan/pengajuan/store', 'KaryawanController::store');
+$routes->group('karyawan', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'KaryawanController::dashboard');
+    $routes->get('pengajuan/create', 'KaryawanController::create');
+    $routes->post('pengajuan/store', 'KaryawanController::store');
+});
 
 // Rute Admin Keuangan
-$routes->get('admin/dashboard', 'AdminController::dashboard');
-$routes->get('admin/pengajuan/update/(:num)/(:any)', 'AdminController::updateStatus/$1/$2');
+$routes->group('admin', ['filter' => 'auth'], function($routes) {
+    $routes->get('dashboard', 'AdminController::dashboard');
+    $routes->get('pengajuan/update/(:num)/(:any)', 'AdminController::updateStatus/$1/$2');
+});
 
 //router sementara
 $routes->get('manager/dashboard', function() {

@@ -8,40 +8,22 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthFilter implements FilterInterface
 {
-    /**
-     * Do whatever processing this filter needs to do.
-     * By default it should not return anything during
-     * normal execution. However, when an abnormal state
-     * is found, it should return an instance of
-     * CodeIgniter\HTTP\Response. If it does, script
-     * execution will end and that Response will be
-     * sent back to the client, allowing for error pages,
-     * redirects, etc.
-     *
-     * @param RequestInterface $request
-     * @param array|null       $arguments
-     *
-     * @return RequestInterface|ResponseInterface|string|void
-     */
     public function before(RequestInterface $request, $arguments = null)
     {
-        //
+        // CEK LOGIN: Jika belum login, tendang ke halaman login
+        if (!session()->get('logged_in')) {
+            session()->setFlashdata('error', 'Silakan login terlebih dahulu untuk mengakses halaman ini.');
+            return redirect()->to('/login');
+        }
     }
 
-    /**
-     * Allows After filters to inspect and modify the response
-     * object as needed. This method does not allow any way
-     * to stop execution of other after filters, short of
-     * throwing an Exception or Error.
-     *
-     * @param RequestInterface  $request
-     * @param ResponseInterface $response
-     * @param array|null        $arguments
-     *
-     * @return ResponseInterface|void
-     */
     public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
     {
-        //
+        // ANTI-BACK BUTTON: Paksa browser untuk tidak menyimpan riwayat cache
+        // Jadi ketika user klik 'Back' setelah logout, browser dipaksa memuat ulang
+        // dan akan tertangkap oleh fungsi before() di atas, lalu ditendang ke login.
+        $response->setHeader('Cache-Control', 'no-store, max-age=0, no-cache, must-revalidate');
+        $response->setHeader('Pragma', 'no-cache');
+        $response->setHeader('Expires', '0');
     }
 }
