@@ -17,10 +17,11 @@ $routes->get('karyawan/dashboard', 'KaryawanController::dashboard');
 $routes->get('karyawan/pengajuan/create', 'KaryawanController::create');
 $routes->post('karyawan/pengajuan/store', 'KaryawanController::store');
 
-//route sementara
-$routes->get('admin/dashboard', function() {
-    return 'Selamat datang ADMIN KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
-});
+// Rute Admin Keuangan
+$routes->get('admin/dashboard', 'AdminController::dashboard');
+$routes->get('admin/pengajuan/update/(:num)/(:any)', 'AdminController::updateStatus/$1/$2');
+
+//router sementara
 $routes->get('manager/dashboard', function() {
     return 'Selamat datang MANAJER KEUANGAN: <b>' . session()->get('nama_lengkap') . '</b> | <a href="/logout">Logout</a>';
 });
