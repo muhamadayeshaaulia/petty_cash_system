@@ -45,7 +45,10 @@ database.default.username = root
 database.default.password = 
 database.default.DBDriver = MySQLi
 ```
-
+5. Buat Tabel Migration yg di butuhkan 
+```php 
+php spark make:migration CreateUsersTable
+```
 <div align="center">
   <p>Made with by 716 Production</p>
   <p>© 2026 Petty Cash. All rights reserved.</p>
