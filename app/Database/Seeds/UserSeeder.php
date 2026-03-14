@@ -49,5 +49,10 @@ class UserSeeder extends Seeder
             'nama_lengkap' => 'Manager Finance',
             'role'         => 'manager_keuangan'
         ]);
+
+        $this->db->table('saldo')->insert([
+            'total_saldo' => 0,
+            'updated_at'  => date('Y-m-d H:i:s')
+        ]);
     }
 }
