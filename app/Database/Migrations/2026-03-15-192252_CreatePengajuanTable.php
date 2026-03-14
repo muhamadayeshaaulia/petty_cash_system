@@ -14,7 +14,7 @@ class CreatePengajuanTable extends Migration
             'tanggal_pengajuan' => ['type' => 'DATE'],
             'keterangan'   => ['type' => 'TEXT'],
             'nominal'      => ['type' => 'DECIMAL', 'constraint' => '15,2'],
-            'status'       => ['type' => 'ENUM', 'constraint' => ['pending', 'diperiksa', 'disetujui', 'ditolak'], 'default' => 'pending'],
+            'status'       => ['type' => 'ENUM', 'constraint' => ['pending', 'diperiksa', 'disetujui', 'dicairkan', 'ditolak'], 'default' => 'pending'],
             'created_at'   => ['type' => 'DATETIME', 'null' => true],
             'updated_at'   => ['type' => 'DATETIME', 'null' => true],
         ]);
