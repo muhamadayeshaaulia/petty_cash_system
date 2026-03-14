@@ -4,14 +4,22 @@ namespace App\Controllers;
 
 use App\Controllers\BaseController;
 use App\Models\PengajuanModel;
+use App\Database\Migrations\CreateSaldoTable;
+use App\Database\Migrations\CreatePengajuanTable;
+use App\Models\PengajuanSaldoModel;
+use App\Models\SaldoModel;
 
 class AdminController extends BaseController
 {
     protected $pengajuanModel;
+    protected $saldoModel;
+    protected $pengajuanSaldoModel;
 
     public function __construct()
     {
         $this->pengajuanModel = new PengajuanModel();
+        $this->saldoModel= new SaldoModel();
+        $this->pengajuanModel= new PengajuanSaldoModel();
     }
 
     public function dashboard()
@@ -50,6 +58,50 @@ class AdminController extends BaseController
         $pesan = ($status_baru == 'diperiksa') ? 'Pengajuan berhasil diverifikasi dan diteruskan ke Manager.' : 'Pengajuan telah ditolak.';
         session()->setFlashdata('success', $pesan);
         
+        return redirect()->to('/admin/dashboard');
+    }   
+
+    // fungsi untuk pengajuan top up saldo
+    public function ajukanTopup()
+    {
+        if (session()->get('role') !== 'admin_keuangan') return redirect()->to('/login');
+
+        $nominal_request = $this->request->getPost('nominal');
+        $id_pegawai = session()->get('id_pegawai');
+        
+        $bulan_ini = date('m');
+        $tahun_ini = date('Y');
+
+        // HITUNG BERAPA YANG SUDAH DIAJUKAN BULAN INI
+        // Kita hitung yang statusnya 'pending' dan 'disetujui' (yang ditolak tidak dihitung)
+        $builder = $this->pengajuanSaldoModel->builder();
+        $builder->selectSum('nominal');
+        $builder->where('MONTH(tanggal_pengajuan)', $bulan_ini);
+        $builder->where('YEAR(tanggal_pengajuan)', $tahun_ini);
+        $builder->whereIn('status', ['pending', 'disetujui']);
+        $query = $builder->get()->getRow();
+
+        $total_terpakai_bulan_ini = $query->nominal ?? 0;
+        
+        // CEK SISA KUOTA (Maksimal 25 Juta)
+        $limit_bulanan = 25000000;
+        $sisa_kuota = $limit_bulanan - $total_terpakai_bulan_ini;
+
+        // JIKA NOMINAL YANG DIMINTA MELEBIHI SISA KUOTA, TOLAK!
+        if ($nominal_request > $sisa_kuota) {
+            session()->setFlashdata('error', 'Pengajuan gagal! Sisa kuota Top-Up Anda bulan ini hanya Rp ' . number_format($sisa_kuota, 0, ',', '.'));
+            return redirect()->to('/admin/dashboard');
+        }
+
+        // JIKA AMAN, SIMPAN PENGAJUAN KE DATABASE
+        $this->pengajuanSaldoModel->save([
+            'id_pegawai'        => $id_pegawai,
+            'tanggal_pengajuan' => date('Y-m-d'),
+            'nominal'           => $nominal_request,
+            'status'            => 'pending' // Menunggu ACC Manager
+        ]);
+
+        session()->setFlashdata('success', 'Pengajuan Top Up berhasil dikirim ke Manager. Menunggu persetujuan.');
         return redirect()->to('/admin/dashboard');
     }
 }
