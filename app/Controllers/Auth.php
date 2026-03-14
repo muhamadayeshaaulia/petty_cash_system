@@ -22,31 +22,33 @@ class Auth extends BaseController
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // cari data user berdasarkan username
-        $user = $userModel->where('username', $username)->first();
+        // menggabungkan tabel users dengan tabel pegawai saat mencari data
+        $user = $userModel->select('users.*, pegawai.nama_lengkap, pegawai.role, pegawai.nip')
+                          ->join('pegawai', 'pegawai.id_user = users.id_user')
+                          ->where('users.username', $username)
+                          ->first();
 
         if ($user){
-            // verifikasi pass (karena di database pass di ekripsi/di hash)
             if (password_verify((string)$password, $user['password'])){
-                // menyimpan data user kedalam session
                 $ses_data =[
-                'id_user' => $user['id_user'],
-                'nama_lengkap' => $user['nama_lengkap'],
-                'username' => $user['username'],
-                'role' => $user['role'],
-                'logged_in' => TRUE
+                    'id_user'      => $user['id_user'],
+                    'nama_lengkap' => $user['nama_lengkap'], 
+                    'nip'          => $user['nip'], // NIP juga bisa kita simpan di sesi
+                    'username'     => $user['username'],
+                    'role'         => $user['role'],
+                    'logged_in'    => TRUE
                 ];
                 session()->set($ses_data);
+                
                 return $this->redirectBerdasarkanRole($user['role']);
-            } else{
+            } else {
                 session()->setFlashdata('error', 'Password Salah');
                 return redirect()->to('/login');
             }
-        }else {
+        } else {
             session()->setFlashdata('error', 'Username tidak di temukan!');
             return redirect()->to('/login');
-            }
-
+        }
     }
     public function logout()
     {
