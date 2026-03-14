@@ -15,10 +15,6 @@ class CreateUsersTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true,
             ],
-            'nama_lengkap' => [ // untuk nama lengkap
-                'type'       => 'VARCHAR',
-                'constraint' => '100',
-            ],
             'username' => [ // username di gunakan untuk login
                 'type'       => 'VARCHAR',
                 'constraint' => '50',
@@ -27,11 +23,6 @@ class CreateUsersTable extends Migration
             'password' => [ // password untuk login kedalam aplikasi
                 'type'       => 'VARCHAR',
                 'constraint' => '255',
-            ],
-            'role' => [ // menentukan role sebagai siapa
-                'type'       => 'ENUM',
-                'constraint' => ['karyawan', 'admin_keuangan', 'manager_keuangan'],
-                'default'    => 'karyawan',
             ],
             'created_at' => [ // time pembuatan pertama kali data di buat
                 'type' => 'DATETIME',
