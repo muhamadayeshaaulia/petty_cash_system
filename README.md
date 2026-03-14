@@ -49,6 +49,7 @@ database.default.DBDriver = MySQLi
 ```php 
 php spark make:migration CreateUsersTable
 php spark make:migration CreatePengajuanTable
+php spark make:migration CreatePegawaiTable
 ```
 
 6. Setelah mengisi keperluan field di migration lakukan
