@@ -12,7 +12,7 @@ class PengajuanModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['id_user', 'tanggal_pengajuan','keterangan', 'nominal', 'status'];
+    protected $allowedFields    = ['id_pegawai', 'tanggal_pengajuan','keterangan', 'nominal', 'status'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;

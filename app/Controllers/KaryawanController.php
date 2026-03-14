@@ -21,12 +21,12 @@ class KaryawanController extends BaseController
             return redirect()->to('/login');
         }
 
-        $id_user = session()->get('id_user');
+        $id_user = session()->get('id_pegawai');
 
-        // Ambil data pengajuan KHUSUS milik karyawan yang sedang login
+        // Ambil data pengajuan KHUSUS milik pegawai yang sedang login
         $data = [
             'title'     => 'Dashboard Karyawan',
-            'pengajuan' => $this->pengajuanModel->where('id_user', $id_user)->findAll()
+            'pengajuan' => $this->pengajuanModel->where('id_pegawai', $id_user)->findAll() // mencari berdasarkan if pegawai
         ];
 
         return view('karyawan/dashboard', $data);
@@ -46,7 +46,7 @@ class KaryawanController extends BaseController
 
         // Simpan data ke database
         $this->pengajuanModel->save([
-            'id_user'           => session()->get('id_user'), // Ambil ID dari sesi login
+            'id_pegawai'           => session()->get('id_pegawai'), // Ambil ID dari sesi login
             'tanggal_pengajuan' => $this->request->getPost('tanggal_pengajuan'),
             'keterangan'        => $this->request->getPost('keterangan'),
             'nominal'           => $this->request->getPost('nominal'),
