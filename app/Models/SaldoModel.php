@@ -6,13 +6,13 @@ use CodeIgniter\Model;
 
 class SaldoModel extends Model
 {
-    protected $table            = 'saldos';
-    protected $primaryKey       = 'id';
+    protected $table            = 'saldo';
+    protected $primaryKey       = 'id_saldo';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = [];
+    protected $allowedFields    = ['total_saldo'];
 
     protected bool $allowEmptyInserts = false;
     protected bool $updateOnlyChanged = true;
@@ -21,7 +21,7 @@ class SaldoModel extends Model
     protected array $castHandlers = [];
 
     // Dates
-    protected $useTimestamps = false;
+    protected $useTimestamps = true;
     protected $dateFormat    = 'datetime';
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';
