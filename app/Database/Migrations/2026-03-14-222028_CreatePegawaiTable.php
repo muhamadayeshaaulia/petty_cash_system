@@ -24,6 +24,6 @@ class CreatePegawaiTable extends Migration
 
     public function down()
     {
-        //
+        $this->forge->dropTable('pegawai'); // untuk menghapus tabel pegawai dari database 
     }
 }
