@@ -24,7 +24,7 @@ class AdminController extends BaseController
         // Ambil semua data pengajuan dan gabungkan (JOIN) dengan tabel users 
         // untuk mendapatkan nama karyawan yang mengajukan
         $dataPengajuan = $this->pengajuanModel
-                              ->select('pengajuan.*, users.nama_lengkap')
+                              ->select('pengajuan.*, pegawai.nama_lengkap')
                               ->join('pegawai', 'pegawai.id_pegawai = pengajuan.id_pegawai')
                               ->orderBy('pengajuan.tanggal_pengajuan', 'DESC')
                               ->findAll();

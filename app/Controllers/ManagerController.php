@@ -23,7 +23,7 @@ class ManagerController extends BaseController
 
         // Ambil semua data pengajuan beserta nama karyawannya
         $dataPengajuan = $this->pengajuanModel
-                              ->select('pengajuan.*, users.nama_lengkap')
+                              ->select('pengajuan.*, pegawai.nama_lengkap')
                               ->join('pegawai', 'pegawai.id_pegawai = pengajuan.id_pegawai')
                               ->orderBy('pengajuan.tanggal_pengajuan', 'DESC')
                               ->findAll();
