@@ -22,8 +22,8 @@ class Auth extends BaseController
         $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
-        // menggabungkan tabel users dengan tabel pegawai saat mencari data
-        $user = $userModel->select('users.*, pegawai.nama_lengkap, pegawai.role, pegawai.nip')
+        // menggabungkan tabel saat mencari data
+        $user = $userModel->select('users.*, pegawai.id_pegawai, pegawai.nama_lengkap, pegawai.role, pegawai.nip')
                           ->join('pegawai', 'pegawai.id_user = users.id_user')
                           ->where('users.username', $username)
                           ->first();
@@ -32,6 +32,7 @@ class Auth extends BaseController
             if (password_verify((string)$password, $user['password'])){
                 $ses_data =[
                     'id_user'      => $user['id_user'],
+                    'id_pegawai'   => $user['id_pegawai'],
                     'nama_lengkap' => $user['nama_lengkap'], 
                     'nip'          => $user['nip'], // NIP juga bisa kita simpan di sesi
                     'username'     => $user['username'],
