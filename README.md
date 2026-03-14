@@ -50,6 +50,7 @@ database.default.DBDriver = MySQLi
 php spark make:migration CreateUsersTable
 php spark make:migration CreatePengajuanTable
 php spark make:migration CreatePegawaiTable
+php spark make:migration CreateSaldoTable
 ```
 
 6. Setelah mengisi keperluan field di migration lakukan
@@ -72,6 +73,8 @@ php spark db:seed UserSeeder
 ```php
 php spark make:model UserModel
 php spark make:model PengajuanModel
+php spark make:migration CreateSaldoTable
+php spark make:model PengajuanSaldoModel
 ```
 
 9. membuat keperluan controler
