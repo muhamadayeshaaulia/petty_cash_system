@@ -37,9 +37,28 @@ class AdminController extends BaseController
                               ->orderBy('pengajuan.tanggal_pengajuan', 'DESC')
                               ->findAll();
 
+        // mengambil total saldo saat ini
+        $saldoRow = $this->saldoModel->first();
+        $total_saldo = $saldoRow ? $saldoRow['total_saldo'] : 0;
+
+        //Hitung Sisa Kuota Top-Up Bulan Ini (Maks 25 Juta)
+        $bulan_ini = date('m');
+        $tahun_ini = date('Y');
+        $builder = $this->pengajuanSaldoModel->builder();
+        $builder->selectSum('nominal');
+        $builder->where('MONTH(tanggal_pengajuan)', $bulan_ini);
+        $builder->where('YEAR(tanggal_pengajuan)', $tahun_ini);
+        $builder->whereIn('status', ['pending', 'disetujui']);
+        $query = $builder->get()->getRow();
+        
+        $total_terpakai = $query->nominal ?? 0;
+        $sisa_kuota = 25000000 - $total_terpakai;
+
         $data = [
-            'title'     => 'Dashboard Admin Keuangan',
-            'pengajuan' => $dataPengajuan
+            'title'       => 'Dashboard Admin Keuangan',
+            'pengajuan'   => $dataPengajuan,
+            'total_saldo' => $total_saldo,
+            'sisa_kuota'  => $sisa_kuota
         ];
 
         return view('admin/dashboard', $data);

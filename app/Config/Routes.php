@@ -23,6 +23,7 @@ $routes->group('karyawan', ['filter' => 'auth'], function($routes) {
 $routes->group('admin', ['filter' => 'auth'], function($routes) {
     $routes->get('dashboard', 'AdminController::dashboard');
     $routes->get('pengajuan/update/(:num)/(:any)', 'AdminController::updateStatus/$1/$2');
+    $routes->post('topup/ajukan', 'AdminController::ajukanTopup');
 });
 
 //router manager keuangan
