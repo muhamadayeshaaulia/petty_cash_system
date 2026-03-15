@@ -22,12 +22,17 @@ $routes->group('karyawan', ['filter' => 'auth'], function($routes) {
 // Rute Admin Keuangan
 $routes->group('admin', ['filter' => 'auth'], function($routes) {
     $routes->get('dashboard', 'AdminController::dashboard');
-    $routes->get('pengajuan/update/(:num)/(:any)', 'AdminController::updateStatus/$1/$2');
     $routes->post('topup/ajukan', 'AdminController::ajukanTopup');
+
+    $routes->get('pengajuan/teruskan/(:num)', 'AdminController::teruskanKeManager/$1');
+    $routes->get('pengajuan/cairkan/(:num)', 'AdminController::cairkanDana/$1');
 });
 
 //router manager keuangan
 $routes->group('manager', ['filter' => 'auth'], function($routes) {
     $routes->get('dashboard', 'ManagerController::dashboard');
     $routes->get('pengajuan/update/(:num)/(:any)', 'ManagerController::updateStatus/$1/$2');
+
+    $routes->get('topup/acc/(:num)', 'ManagerController::accTopup/$1');
+    $routes->get('topup/tolak/(:num)', 'ManagerController::tolakTopup/$1');
 });
