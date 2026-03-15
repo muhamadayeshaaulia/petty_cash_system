@@ -29,20 +29,30 @@
         </div>
 
         <nav class="flex-1 px-3 space-y-2">
-            <a href="/karyawan/dashboard" class="flex items-center justify-start h-12 px-3 hover:bg-slate-800 rounded-2xl transition-all group overflow-hidden">
+            <?php $dashActive = url_is('karyawan/dashboard') || url_is('karyawan'); ?>
+            <a href="/karyawan/dashboard" 
+            class="flex items-center justify-start h-12 px-3 rounded-2xl transition-all group overflow-hidden 
+            <?= $dashActive ? 'text-white bg-blue-600 shadow-lg shadow-blue-600/20 font-bold' : 'hover:bg-slate-800 text-slate-400' ?>">
                 <div class="w-10 flex-shrink-0 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                    </svg>
                 </div>
-                <span class="sidebar-text ml-3 font-medium">Dashboard</span>
+                <span class="sidebar-text ml-3">Dashboard</span>
             </a>
-            <a href="/karyawan/pengajuan/create" class="flex items-center justify-start h-12 px-3 hover:bg-slate-800 rounded-2xl transition-all group overflow-hidden">
+
+            <?php $createActive = url_is('karyawan/pengajuan/create'); ?>
+            <a href="/karyawan/pengajuan/create" 
+            class="flex items-center justify-start h-12 px-3 rounded-2xl transition-all group overflow-hidden 
+            <?= $createActive ? 'text-white bg-blue-600 shadow-lg shadow-blue-600/20 font-bold' : 'hover:bg-slate-800 text-slate-400' ?>">
                 <div class="w-10 flex-shrink-0 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" /></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                    </svg>
                 </div>
-                <span class="sidebar-text ml-3 font-medium">Buat Pengajuan</span>
+                <span class="sidebar-text ml-3">Buat Pengajuan</span>
             </a>
         </nav>
-
         <div class="p-3 border-t border-slate-800">
             <a href="/logout" onclick="return confirm('Keluar?')" class="flex items-center justify-start h-12 px-3 text-red-400 hover:bg-red-500/10 rounded-2xl transition-all font-semibold overflow-hidden">
                 <div class="w-10 flex-shrink-0 flex items-center justify-center">
