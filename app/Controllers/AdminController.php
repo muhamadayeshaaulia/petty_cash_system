@@ -19,7 +19,7 @@ class AdminController extends BaseController
     {
         $this->pengajuanModel = new PengajuanModel();
         $this->saldoModel= new SaldoModel();
-        $this->pengajuanModel= new PengajuanSaldoModel();
+        $this->pengajuanSaldoModel= new PengajuanSaldoModel();
     }
 
     public function dashboard()

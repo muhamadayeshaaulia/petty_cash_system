@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class PengajuanSaldoModel extends Model
 {
-    protected $table            = 'pengajuansaldo';
+    protected $table            = 'pengajuan_saldo';
     protected $primaryKey       = 'id_topup';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
