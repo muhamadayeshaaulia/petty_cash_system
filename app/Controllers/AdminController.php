@@ -65,20 +65,51 @@ class AdminController extends BaseController
     }
 
     // Fungsi untuk memproses aksi Terima/Tolak dari Admin
-    public function updateStatus($id_pengajuan, $status_baru)
+   public function teruskanKeManager($id_pengajuan)
     {
         if (session()->get('role') !== 'admin_keuangan') return redirect()->to('/login');
 
-        // Update status di database
-        $this->pengajuanModel->update($id_pengajuan, [
-            'status' => $status_baru
-        ]);
+        // Ubah status dari 'pending' menjadi 'diperiksa'
+        $this->pengajuanModel->update($id_pengajuan, ['status' => 'diperiksa']);
+        
+        session()->setFlashdata('success', 'Pengajuan berhasil diteruskan ke Manager untuk di-ACC.');
+        return redirect()->to('/admin/dashboard');
+    }
 
-        $pesan = ($status_baru == 'diperiksa') ? 'Pengajuan berhasil diverifikasi dan diteruskan ke Manager.' : 'Pengajuan telah ditolak.';
-        session()->setFlashdata('success', $pesan);
+    // FUNGSI Admin mencairkan dana (Setelah di-ACC Manager)
+    public function cairkanDana($id_pengajuan)
+    {
+        if (session()->get('role') !== 'admin_keuangan') return redirect()->to('/login');
+
+        // Ambil data pengajuan yang mau dicairkan
+        $pengajuan = $this->pengajuanModel->find($id_pengajuan);
+
+        if ($pengajuan && $pengajuan['status'] == 'disetujui') {
+            
+            // Ambil total saldo Petty Cash saat ini
+            $saldoRow = $this->saldoModel->first();
+            $saldo_sekarang = $saldoRow['total_saldo'];
+
+            // CEK SALDO: Apakah cukup untuk mencairkan?
+            if ($saldo_sekarang < $pengajuan['nominal']) {
+                session()->setFlashdata('error', 'Gagal! Saldo Anda tidak cukup (Sisa: Rp ' . number_format($saldo_sekarang, 0, ',', '.') . '). Silakan ajukan Top-Up ke Manager.');
+                return redirect()->to('/admin/dashboard');
+            }
+
+            // POTONG SALDO: Kurangi saldo dengan nominal pencairan
+            $saldo_baru = $saldo_sekarang - $pengajuan['nominal'];
+            $this->saldoModel->update($saldoRow['id_saldo'], ['total_saldo' => $saldo_baru]);
+
+            // UBAH STATUS PENGAJUAN: Menjadi 'dicairkan'
+            $this->pengajuanModel->update($id_pengajuan, ['status' => 'dicairkan']);
+
+            session()->setFlashdata('success', 'Dana sebesar Rp ' . number_format($pengajuan['nominal'], 0, ',', '.') . ' berhasil dicairkan! Saldo Petty Cash telah dipotong otomatis.');
+        } else {
+            session()->setFlashdata('error', 'Data tidak valid atau belum di-ACC Manager.');
+        }
         
         return redirect()->to('/admin/dashboard');
-    }   
+    }
 
     // fungsi untuk pengajuan top up saldo
     public function ajukanTopup()
